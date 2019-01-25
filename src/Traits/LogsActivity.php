@@ -34,6 +34,7 @@ trait LogsActivity
                 app(ActivityLogger::class)
                     ->useLog($logName)
                     ->performedOn($model)
+                    ->causedBy(collect(request()->get('auth_data'))->get('user_id'))
                     ->withProperties($model->attributeValuesToBeLogged($eventName))
                     ->log($description);
             });
